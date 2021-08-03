@@ -1,0 +1,52 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body
+{
+    height: 100%;
+}
+
+body
+{
+    color: #F3F4F5;
+    background-color: #273036;
+    font-family: "Roboto", sans-serif;
+    padding: 3rem 5rem;
+}
+
+h1
+{
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+    letter-spacing: .1rem;
+    font-size: 2.25rem;
+}
+
+.labeled-slider
+{
+    display: flex;
+    align-items: center;
+    background-color: #1c2428;
+    color: #F3F4F5;
+    padding: .75rem 1.75rem;
+    border-radius: 50px;
+}
+
+.button-wrapper
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .75rem 0;
+}
+
+.pattern-button-text
+{
+    word-wrap: anywhere;
+}
