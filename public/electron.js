@@ -104,6 +104,7 @@ ipcMain.on("PD-load-patterns", () =>
         }
     }
 
+    sendFrameToAllDiscoveries({ brightness: .5 });
     win.webContents.send("create-pattern-buttons", patterns);
 })
 
@@ -122,7 +123,10 @@ ipcMain.on("PD-slider-changed", (e, data) =>
 // called when a pattern button is pressed
 ipcMain.on("PD-pattern-button-clicked", (e, patternId) =>
 {
-    sendFrameToAllDiscoveries({ activeProgramId: patternId, getControls: patternId });
+    sendFrameToAllDiscoveries({
+        activeProgramId: patternId,
+        getControls: patternId
+    });
 });
 
 

@@ -2,12 +2,11 @@ import react from "react"
 import { PDHeader } from "./PDHeader"
 import {PDPatterns} from "./PDPatterns";
 
-let sliders = {};
-let patternButtons = {};
-
 export class PDApp extends react.Component
 {
     __isMounted = false;
+    sliders = {};
+    patternButtons = {};
 
     componentDidMount()
     {
@@ -15,7 +14,7 @@ export class PDApp extends react.Component
 
         window.api.receive("create-pattern-buttons", programList =>
         {
-            patternButtons = programList;
+            this.patternButtons = programList;
             this.forceUpdate();
         });
 
@@ -23,26 +22,25 @@ export class PDApp extends react.Component
         {
             console.log("create-controls received");
 
-            sliders = controls
+            const ctrls = controls === undefined ? {} : controls;
+            const ctrlKeys = Object.keys(ctrls);
 
-            // const ctrls = controls === undefined ? {} : controls;
-            // const ctrlKeys = Object.keys(ctrls);
-            //
-            // const slidersFiltered = ctrlKeys.filter(key =>
-            // {
-            //     return key.startsWith("slider") || key === "brightness";
-            // });
-            //
-            // if (slidersFiltered.length === 0)
-            // {
-            //     this.forceUpdate();
-            //     return;
-            // }
-            //
-            // sliders = slidersFiltered.reduce((obj, key) =>
-            // {
-            //     return { ...obj, [key]: ctrls[key] }
-            // }, {});
+            const slidersFiltered = ctrlKeys.filter(key => key.startsWith("slider"));
+
+            this.sliders = { brightness: .5 };
+
+            if (slidersFiltered.length === 0)
+            {
+                this.forceUpdate();
+                return;
+            }
+
+            const reducedSliders = slidersFiltered.reduce((obj, key) =>
+            {
+                return { ...obj, [key]: ctrls[key] }
+            }, {});
+
+            this.sliders = { ...this.sliders, ...reducedSliders }
 
             this.forceUpdate();
             console.log("UPDATED SLIDERS");
@@ -58,8 +56,8 @@ export class PDApp extends react.Component
     {
         return (
             <div>
-                <PDHeader sliders={sliders} />
-                <PDPatterns buttons={patternButtons} />
+                <PDHeader sliders={this.sliders} />
+                <PDPatterns buttons={this.patternButtons} />
             </div>
         )
     }

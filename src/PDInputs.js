@@ -3,8 +3,6 @@ import { PDSlider } from "./PDSlider";
 
 export function PDInputs(props)
 {
-    const sliders = { ...{ "brightness": 1 }, ...props.sliders };
-
     const inputGridStyle = makeStyles({
         root: {
             margin: ".5rem 0 2rem 0"
@@ -18,39 +16,18 @@ export function PDInputs(props)
             spacing={2}
             className={inputGridStyle().root}>
             {
-                Object.keys(sliders).map(sliderName =>
+                Object.keys(props.sliders).map(sliderName =>
                 {
                     return <PDSlider
                         key={sliderName}
-                        text={sliderName}
+                        text={sliderName
+                            .replace("slider", "")
+                            .replaceAll(/([A-Z])/g, " $1")
+                            .toUpperCase() + ":"}
                         propertyName={sliderName}
-                        initValue={sliders[sliderName]}/>
+                        initValue={props.sliders[sliderName]}/>
                 })
             }
         </Grid>
     )
 }
-
-// export function PDInputs(props)
-// {
-//     if (props.sliders === undefined)
-//     {
-//         // TODO: get this initValue programmatically
-//         return (
-//             <Box display={"flex"} justifyContent={"space-evenly"} marginBottom={"4rem"}>
-//                 {/*<PDSlider text={"BRIGHTNESS"} propertyName={"brightness"} initValue={1} />*/}
-//             </Box>
-//         )
-//     }
-//
-//     return (
-//         <Box display={"flex"} justifyContent={"space-evenly"} marginBottom={"4rem"}>
-//             {
-//                 Object.keys(props.sliders).map(propertyName =>
-//                 {
-//                     return <PDSlider key={propertyName} text={propertyName} propertyName={propertyName} initValue={props.sliders[propertyName]} />
-//                 })
-//             }
-//         </Box>
-//     )
-// }

@@ -150,12 +150,10 @@ module.exports = class PixelblazeController {
 
           if (json.controls)
           {
-            // console.log(props);
-            //
             const controls = json.controls[Object.keys(json.controls)[0]]
-            //
-            // console.log("FOUND CONTROLS!");
-            // console.log(controls);
+
+            console.log("FOUND CONTROLS!");
+            console.log(controls);
 
             BrowserWindow.getFocusedWindow().webContents.send("create-controls", controls);
           }

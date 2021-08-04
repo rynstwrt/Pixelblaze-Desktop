@@ -2,7 +2,8 @@ import { makeStyles, Slider, Typography, Grid } from "@material-ui/core"
 
 const typographyStyle = makeStyles({
     root: {
-        marginRight: ".5rem"
+        marginRight: ".5rem",
+        textAlign: "center"
     }
 })
 
@@ -19,7 +20,7 @@ export function PDSlider(props)
         <Grid item xs={4} lg={3} xl={2}>
             <div className={"labeled-slider"}>
                 <Typography id={"labeled-slider-label"} className={typographyStyle().root}>
-                    {props.text.replace("slider", "").toUpperCase() + ":"}
+                    {props.text}
                 </Typography>
 
                 <Slider
@@ -35,26 +36,3 @@ export function PDSlider(props)
         </Grid>
     )
 }
-
-// export function PDSlider(props)
-// {
-//     return (
-//         <div className={"labeled-slider"}>
-//             <Typography
-//                 id={"labeled-slider-label"}
-//                 className={typographyStyle().root}>
-//                 {props.text + ":"}
-//             </Typography>
-//
-//             <Slider
-//                 className={sliderStyle().root}
-//                 aria-labelledby={"labeled-slider-label"}
-//                 defaultValue={props.initValue}
-//                 step={0.001}
-//                 min={0}
-//                 max={1}
-//                 onChangeCommitted={(e, newValue) => window.api.send("PD-slider-changed", [newValue, props.propertyName])}
-//             />
-//         </div>
-//     )
-// }
