@@ -17,20 +17,21 @@ export function PDSlider(props)
 {
     return (
         <Grid item xs={4} lg={3} xl={2}>
-            <Typography id={"labeled-slider-label"} className={typographyStyle().root}>
-                {props.text + ":"}
-            </Typography>
+            <div className={"labeled-slider"}>
+                <Typography id={"labeled-slider-label"} className={typographyStyle().root}>
+                    {props.text.replace("slider", "").toUpperCase() + ":"}
+                </Typography>
 
-            <Slider
-                className={sliderStyle().root}
-                aria-labelledby={"labeled-slider-label"}
-                // defaultValue={props.initValue}
-                defaultValue={.5}
-                step={0.001}
-                min={0}
-                max={1}
-                onChangeCommitted={(e, newValue) => window.api.send("PD-slider-changed", [newValue, props.propertyName])}
-            />
+                <Slider
+                    className={sliderStyle().root}
+                    aria-labelledby={"labeled-slider-label"}
+                    defaultValue={props.initValue}
+                    step={0.001}
+                    min={0}
+                    max={1}
+                    onChangeCommitted={(e, newValue) => window.api.send("PD-slider-changed", [newValue, props.propertyName])}
+                />
+            </div>
         </Grid>
     )
 }

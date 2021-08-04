@@ -23,7 +23,7 @@ export class PDApp extends react.Component
         {
             console.log("create-controls received");
 
-            sliders = { "brightness": 1 }
+            sliders = controls
 
             // const ctrls = controls === undefined ? {} : controls;
             // const ctrlKeys = Object.keys(ctrls);
@@ -43,9 +43,9 @@ export class PDApp extends react.Component
             // {
             //     return { ...obj, [key]: ctrls[key] }
             // }, {});
-            //
-            // this.forceUpdate();
-            // console.log("UPDATED SLIDERS");
+
+            this.forceUpdate();
+            console.log("UPDATED SLIDERS");
         });
     }
 
