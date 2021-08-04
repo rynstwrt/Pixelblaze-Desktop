@@ -1,6 +1,18 @@
 {
   "name": "pixelblaze-desktop",
-  "version": "0.1.0",
+  "description": "A desktop app to control Pixelblaze LED controllers.",
+  "author": "Ryan Stewart",
+  "build": {
+    "productName": "Pixelblaze Desktop",
+    "appId": "art.ryanstew.pixelblazedesktop",
+    "directories": {
+      "buildResources": "public"
+    }
+  },
+  "main": "public/electron.js",
+  "homepage": "./",
+  "version": "1.0.0",
+  "license": "ISC",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.2.0",
@@ -9,6 +21,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "electron-is-dev": "^2.0.0",
     "lodash": "^4.17.21",
     "node-fetch": "^2.6.1",
     "react": "^17.0.2",
@@ -16,14 +29,16 @@
     "react-scripts": "4.0.3",
     "ws": "^8.0.0"
   },
-  "main": "public/electron.js",
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "craco eject",
+    "react-build": "craco build",
+    "react-test": "craco test",
+    "react-eject": "craco eject",
     "dev": "concurrently -k \"npm start\" \"npm:electron\"",
-    "electron": "wait-on tcp:3000 && electron ."
+    "electron": "wait-on tcp:3000 && electron .",
+    "electron-build": "electron-builder",
+    "release": "yarn react-build && electron-builder --publish=never",
+    "build": "yarn react-build && yarn electron-build"
   },
   "eslintConfig": {
     "extends": [
@@ -46,8 +61,7 @@
   "devDependencies": {
     "concurrently": "^6.2.0",
     "electron": "^13.1.7",
-    "electron-is-dev": "^2.0.0",
-    "form-data": "^4.0.0",
+    "electron-builder": "^22.11.7",
     "wait-on": "^6.0.0"
   }
 }

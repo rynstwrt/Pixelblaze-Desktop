@@ -1,7 +1,6 @@
 const WebSocket = require('ws');
 const _ = require('lodash');
 const fetch = require('node-fetch');
-const FormData = require('form-data');
 const { BrowserWindow } = require("electron");
 
 const PacketType = {
