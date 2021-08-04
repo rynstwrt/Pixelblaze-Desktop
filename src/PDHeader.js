@@ -1,7 +1,7 @@
-import { PDSlider } from "./PDSlider"
+import { PDInputs } from "./PDInputs"
 import {Box, Button, makeStyles} from "@material-ui/core"
 
-export function PDHeader()
+export function PDHeader(props)
 {
     const loadButtonStyle = makeStyles({
         root: {
@@ -28,9 +28,8 @@ export function PDHeader()
                 </Button>
             </Box>
 
-            <Box display={"flex"} justifyContent={"space-evenly"} marginBottom={"4rem"}>
-                <PDSlider text={"BRIGHTNESS"} propertyName={"brightness"} />
-            </Box>
+            <PDInputs sliders={props.sliders}/>
+
         </header>
     )
 }

@@ -54,7 +54,7 @@ module.exports.start = function (options) {
 
     switch (header.packetType) {
       case PacketTypes.BEACONPACKET:
-        //console.log("BEACONPACKET from " + remote.address + ':' + remote.port + " id: " + header.senderId + " senderTime: " + header.senderTime + " delta: " + (now32 - header.senderTime));
+        // console.log("BEACONPACKET from " + remote.address + ':' + remote.port + " id: " + header.senderId + " senderTime: " + header.senderTime + " delta: " + (now32 - header.senderTime));
 
         //record this discovery and fire up a controller
         let record = discoveries[header.senderId] = discoveries[header.senderId] || {};

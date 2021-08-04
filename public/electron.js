@@ -13,6 +13,8 @@ function createWindow()
         width: isDev ? 1200 : 800,
         height: 800,
         webPreferences: {
+            nodeIntegration: true,
+            enableRemoteModule: true,
             preload: path.join(__dirname, "preload.js")
         }
     });
@@ -120,8 +122,8 @@ ipcMain.on("PD-slider-changed", (e, data) =>
 // called when a pattern button is pressed
 ipcMain.on("PD-pattern-button-clicked", (e, patternId) =>
 {
-    sendFrameToAllDiscoveries({ "activeProgramId": patternId })
-})
+    sendFrameToAllDiscoveries({ activeProgramId: patternId, getControls: patternId });
+});
 
 
 // helper function to send frames to all the discoveries

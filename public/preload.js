@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () =>
 })
 
 const validSendChannels = ["PD-load-patterns", "PD-slider-changed", "PD-pattern-button-clicked"]
-const validReceiveChannels = ["create-pattern-buttons"]
+const validReceiveChannels = ["create-pattern-buttons", "create-controls"]
 contextBridge.exposeInMainWorld(
     "api", {
         // data going to main

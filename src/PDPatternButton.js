@@ -6,6 +6,7 @@ const patternButtonStyle = makeStyles({
         backgroundColor: "#F3F4F5",
         padding: ".75rem 2rem",
         width: "100%",
+        minWidth: "150px",
         maxWidth: "200px",
 
         "&:hover":
@@ -18,7 +19,7 @@ const patternButtonStyle = makeStyles({
 export function PDPatternButton(props)
 {
     return (
-        <Grid item xs={4}>
+        <Grid item xs={4} lg={3} xl={2}>
             <div className={"button-wrapper"}>
                 <Button
                     className={patternButtonStyle().root}

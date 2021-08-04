@@ -2,6 +2,7 @@ const WebSocket = require('ws');
 const _ = require('lodash');
 const fetch = require('node-fetch');
 const FormData = require('form-data');
+const { BrowserWindow } = require("electron");
 
 const PacketType = {
   SAVEPROGRAMSOURCEFILE: 1,
@@ -30,6 +31,17 @@ function readAsUtf8(buf, cb) {
   };
   f.readAsText(bb);
 }
+
+/** ---------------------------------------------------- **/
+
+Object.filter = (obj, predicate) =>
+{
+  Object.keys(obj)
+      .filter(key => predicate(obj[key]))
+      .reduce((res, key) => (res[key] === obj[key], res), {})
+}
+
+/** ---------------------------------------------------- **/
 
 module.exports = class PixelblazeController {
   constructor(props, command) {
@@ -98,10 +110,12 @@ module.exports = class PixelblazeController {
         console.err("Problem parsing packet", err);
       }
     } else {
+
       var buf = new Uint8Array(msg);
       if (buf.length < 1)
         return;
       var type = buf[0];
+
       switch (type) {
         case PacketType.PREVIEWFRAME:
           break;
@@ -128,6 +142,27 @@ module.exports = class PixelblazeController {
             props.programList = this.partialList;
             // console.log("received programs", props.id, props.programList);
           }
+          break;
+          /** -------------------------------------------- **/
+        case 123:
+          const jsonString = String.fromCharCode.apply(null, buf)
+          const json = JSON.parse(jsonString);
+
+          if (json.controls)
+          {
+            console.log(props);
+
+            const controls = json.controls[Object.keys(json.controls)[0]]
+
+            console.log("FOUND CONTROLS!");
+            console.log(controls);
+
+            BrowserWindow.getFocusedWindow().webContents.send("create-controls", controls);
+          }
+          break;
+          /** -------------------------------------------- **/
+        default:
+          console.log(msg);
           break;
       }
     }

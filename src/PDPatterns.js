@@ -8,8 +8,7 @@ export function PDPatterns(props)
             container
             direction={"row"}
             justifyContent={"center"}
-            spacing={1}>
-
+            spacing={2}>
             {
                 Object.keys(props.buttons).map(id =>
                 {
