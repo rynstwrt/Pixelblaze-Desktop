@@ -52,3 +52,26 @@ h1
 {
     word-wrap: anywhere;
 }
+
+.popup-content
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    padding: 3rem 5rem;
+}
+
+.popup-content > div
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-overlay
+{
+    background: rgba(0, 0, 0, .65)
+}

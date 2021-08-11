@@ -3,8 +3,9 @@ const { app, BrowserWindow, ipcMain } = require("electron")
 const isDev = require("electron-is-dev")
 const discovery = require("./discovery")
 
-// TODO: remove magic number
-const numPixelblazeOnNetwork = 2;
+
+let numPixelblazeOnNetwork = undefined;
+
 
 let win;
 function createWindow()
@@ -74,8 +75,9 @@ Object.size = obj =>
 
 
 // called when the load patterns button is clicked
-ipcMain.on("PD-load-patterns", () =>
+ipcMain.on("PD-load-patterns", (e, numPixelblaze) =>
 {
+    numPixelblazeOnNetwork = numPixelblaze
     const discoveries = discovery.discoveries;
 
     let programIds = [];
@@ -97,7 +99,7 @@ ipcMain.on("PD-load-patterns", () =>
                 for (const num of programIds)
                     counts[num] = (counts[num] || 0) + 1;
 
-                if (counts[program.id] === numPixelblazeOnNetwork)
+                if (counts[program.id] === parseInt(numPixelblazeOnNetwork))
                     patterns[program.id] = program.name;
 
             }
