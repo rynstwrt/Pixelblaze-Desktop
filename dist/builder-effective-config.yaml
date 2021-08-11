@@ -1,0 +1,12 @@
+directories:
+  output: dist
+  buildResources: public
+files:
+  - filter:
+      - build/**/*
+extraMetadata:
+  main: build/electron.js
+productName: Pixelblaze Desktop
+appId: art.ryanstew.pixelblazedesktop
+extends: react-cra
+electronVersion: 13.1.7
